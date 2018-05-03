@@ -2,18 +2,17 @@
 % Please edit documentation in R/update_db.R
 \name{update_db}
 \alias{update_db}
-\title{A basic function}
+\title{Creates a SQLite database on the M drive}
 \usage{
 update_db()
 }
-\arguments{
-\item{test}{Tests if the function is working. Defaults to TRUE.}
-}
 \description{
-This is a test function I wrote.
+Finds the Access database on the M drive and creates a new
+  SQLite database, if the SQLite needs updating. The Function will not work
+  unless you are connected to the M drive.
 }
 \examples{
-test()
+Need to add...
 }
 \author{
 Michael J. Dodrill, \email{mdodrill@usgs.gov}
