@@ -1,34 +1,38 @@
-#' @title A basic function
-#' @description This is a test function I wrote.
-#' @param test Tests if the function is working. Defaults to TRUE.
-#' @examples test()
-#' @export
+#' @title Creates a SQLite database on the M drive
+#'
+#' @description Finds the Access database on the M drive and creates a new
+#'   SQLite database, if the SQLite needs updating. The Function will not work
+#'   unless you are connected to the M drive.
+#'
+#' @param
+#' @examples Need to add...
 #' @author Michael J. Dodrill, \email{mdodrill@usgs.gov}
+#' @export
 
-
-# need to update, make this function run !!!!!!!!
 
 update_db = function(){
   # require(RSQLite)
   # require(dplyr)
 
-  db.dir = "M:/DATABASE/BIOLOGICAL/FISH/DATABASE_BACKUPS"
+  db.dir.m = "M:/DATABASE/BIOLOGICAL/FISH/DATABASE_BACKUPS"
 
-  if(dir.exists(path = db.dir) == FALSE){
+  if(dir.exists(path = db.dir.m) == FALSE){
     return(message("MD: Can't find the database!, Are you connected to the M drive?"))
   }
 
-  all.files = list.files(path = db.dir, pattern = ".mdb")
+  all.files = list.files(path = db.dir.m, pattern = ".mdb")
 
   # find the most recent db on the M drive
   the.one = sort(all.files)[length(all.files)]
   the.one.date = substr(the.one, 30, nchar(the.one) - 4)
 
-  db.path = paste(db.dir, the.one, sep = "/")
+  db.path = paste(db.dir.m, the.one, sep = "/")
 
   #---------------------------------
   # check to see if this version of the db already exists as sqlite db
-  tmp = substr(list.files(path = data.dir, pattern = ".sqlite3"), 7, 19)
+  db.dir.sq.m = "M:/DATABASE/BIOLOGICAL/FISH/DATABASE_R_SQLite"
+
+  tmp = substr(list.files(path = db.dir.sq.m, pattern = ".sqlite3"), 7, 19)
 
   if(length(tmp) > 0){  # if it exists
     if(the.one.date == tmp){ # if this version matches the one on the M
@@ -45,9 +49,9 @@ update_db = function(){
   # here "AccessExporter_v1.exe"
 
   # sample table
-  file.name = paste(data.dir, "/samp_table_", the.one.date, ".txt", sep = "")
+  file.name = paste(db.dir.sq.m, "/samp_table_", the.one.date, ".txt", sep = "")
 
-  exporter.path = paste(str.dir, "/Exporter/AccessExporter_v1.exe", sep = "")
+  exporter.path = paste(db.dir.sq.m, "/Exporter/AccessExporter_v1.exe", sep = "")
 
   system(paste(exporter.path,
                db.path,
@@ -55,7 +59,7 @@ update_db = function(){
                file.name))
   #---------------------------------
   # specimen table
-  file.name.2 = paste(data.dir, "/spec_table_", the.one.date, ".txt", sep = "")
+  file.name.2 = paste(db.dir.sq.m, "/spec_table_", the.one.date, ".txt", sep = "")
 
   system(paste(exporter.path,
                db.path,
@@ -65,8 +69,8 @@ update_db = function(){
   #-----------------------------------------------------------------------------#
   # check if sqlite db is in the data folder and delete before making a new one
 
-  if(length(list.files(path = data.dir, pattern = ".sqlite3")) > 0){
-    old.db = paste(data.dir, list.files(path = data.dir, pattern = ".sqlite3"), sep = "/")
+  if(length(list.files(path = db.dir.sq.m, pattern = ".sqlite3")) > 0){
+    old.db = paste(db.dir.sq.m, list.files(path = db.dir.sq.m, pattern = ".sqlite3"), sep = "/")
     file.remove(old.db)
   }
 
@@ -77,7 +81,7 @@ update_db = function(){
 
   spec = read.table(file = file.name.2, header = T, sep = ",")
 
-  db.name = paste(data.dir, "/my_db_", the.one.date, ".sqlite3", sep = "")
+  db.name = paste(db.dir.sq.m, "/my_db_", the.one.date, ".sqlite3", sep = "")
 
   # Could add some data formatting stuff here, before the tables are written to the db...
 
