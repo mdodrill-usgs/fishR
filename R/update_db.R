@@ -2,7 +2,9 @@
 #'
 #' @description Finds the Access database on the M drive and creates a new
 #'   SQLite database, if the SQLite needs updating. The Function will not work
-#'   unless you are connected to the M drive.
+#'   unless you are connected to the M drive. Most of the time the user
+#'   shouldn't have to use this as a stand alone function, but use the argument
+#'   in \code{\link{connect_fish_db}}
 #'
 #' @param
 #' @examples Need to add...
@@ -86,11 +88,11 @@ update_db = function(){
   # Could add some data formatting stuff here, before the tables are written to the db...
 
   # create a blank database
-  my_db <- src_sqlite(db.name, create = T)
+  my_db <- dplyr::src_sqlite(db.name, create = T)
 
   # addes these tables to the "my_db"
-  copy_to(my_db, samp, temporary = FALSE)
-  copy_to(my_db, spec, temporary = FALSE)
+  dplyr::copy_to(my_db, samp, temporary = FALSE)
+  dplyr::copy_to(my_db, spec, temporary = FALSE)
 
   # remove the .txt files
   file.remove(file.name)
