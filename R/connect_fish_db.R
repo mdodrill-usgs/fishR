@@ -35,7 +35,8 @@ connect_fish_db = function(update.db = FALSE){
   sq.path = paste0(db.dir.loc, '/', sq.name)
 
   # connect to db
-  my_db = dplyr::src_sqlite(path = sq.path, create = FALSE)
+  # my_db = dplyr::src_sqlite(path = sq.path, create = FALSE)
+  my_db = DBI::dbConnect(RSQLite::SQLite(), dbname = sq.path)
 
  return(my_db)
 }
