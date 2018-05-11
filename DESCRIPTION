@@ -10,4 +10,7 @@ LazyData: true
 RoxygenNote: 6.0.1
 Imports:
   RSQLite,
-  DBI
+  DBI,
+  ggmcmc,
+  gridExtra,
+  ggthemes
