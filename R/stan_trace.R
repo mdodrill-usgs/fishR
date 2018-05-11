@@ -1,11 +1,34 @@
-#' @title A basic function
-#' @description This is a test function I wrote.
-#' @param test Tests if the function is working. Defaults to TRUE.
-#' @examples test()
+#' @title Trace plots for Stan model objects
+#'
+#' @description Creates trace and density plots for Stan model objects, with
+#'   R-hat and Neff displayed.
+#' @param fit Stan model object.
+#' @param par.name Name of the parameter of interest in quotes.
+#' @param number A numeric vector giving the index for what values of the
+#'   parameter to display.  This can be also be a list for specifying paramaters
+#'   in a matrix. See Details.
+#' @param same.scale Display the density plots on the same x-axis scale, across parameters. Defaults to false.
+#' @examples Need to add examples.
 #' @author Michael J. Dodrill, \email{mdodrill@usgs.gov}
 #' @export
 
+# to do:
+# 1). add in mean bars for right hand side plot
+# 2). for large model objects, figure out a better way to format the data!
 
+# little helper function
+# make.name = function(par.name, number){
+#   out = vector()
+#   for(i in 1:length(number)){
+#     out[i] = c(paste(par.name,"[",number[i],"]", sep = ""))
+#   }
+#   return(out)
+# }
+
+# number = c(1:7)
+# number = list(c(1:7), c(1:7))
+# par.name = "mu_sz"
+# par.name = "s_sp_eff"
 
 stan_trace = function(fit, par.name, number, same.scale = FALSE){
   # require(ggmcmc)

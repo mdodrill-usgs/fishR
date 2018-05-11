@@ -6,7 +6,6 @@
 #'   shouldn't have to use this as a stand alone function, but use the argument
 #'   in \code{\link{connect_fish_db}}
 #'
-#' @param
 #' @examples Need to add...
 #' @author Michael J. Dodrill, \email{mdodrill@usgs.gov}
 #' @export

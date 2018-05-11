@@ -2,18 +2,27 @@
 % Please edit documentation in R/stan_trace.R
 \name{stan_trace}
 \alias{stan_trace}
-\title{A basic function}
+\title{Trace plots for Stan model objects}
 \usage{
 stan_trace(fit, par.name, number, same.scale = FALSE)
 }
 \arguments{
-\item{test}{Tests if the function is working. Defaults to TRUE.}
+\item{fit}{Stan model object.}
+
+\item{par.name}{Name of the parameter of interest in quotes.}
+
+\item{number}{A numeric vector giving the index for what values of the
+parameter to display.  This can be also be a list for specifying paramaters
+in a matrix. See Details.}
+
+\item{same.scale}{Display the density plots on the same x-axis scale, across parameters. Defaults to false.}
 }
 \description{
-This is a test function I wrote.
+Creates trace and density plots for Stan model objects, with
+  R-hat and Neff displayed.
 }
 \examples{
-test()
+Need to add examples.
 }
 \author{
 Michael J. Dodrill, \email{mdodrill@usgs.gov}
