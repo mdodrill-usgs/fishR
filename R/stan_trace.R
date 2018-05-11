@@ -2,28 +2,9 @@
 #' @description This is a test function I wrote.
 #' @param test Tests if the function is working. Defaults to TRUE.
 #' @examples test()
-#' @export
 #' @author Michael J. Dodrill, \email{mdodrill@usgs.gov}
-#'
+#' @export
 
-#-----------------------------------------------------------------------------#
-# to do:
-# 1). add in mean bars for right hand side plot
-# 2). for large model objects, figure out a better way to format the data!
-
-# little helper function
-# make.name = function(par.name, number){
-#   out = vector()
-#   for(i in 1:length(number)){
-#     out[i] = c(paste(par.name,"[",number[i],"]", sep = ""))
-#   }
-#   return(out)
-# }
-
-# number = c(1:7)
-# number = list(c(1:7), c(1:7))
-# par.name = "mu_sz"
-# par.name = "s_sp_eff"
 
 
 stan_trace = function(fit, par.name, number, same.scale = FALSE){

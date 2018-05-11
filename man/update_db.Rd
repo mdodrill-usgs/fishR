@@ -9,7 +9,9 @@ update_db()
 \description{
 Finds the Access database on the M drive and creates a new
   SQLite database, if the SQLite needs updating. The Function will not work
-  unless you are connected to the M drive.
+  unless you are connected to the M drive. Most of the time the user
+  shouldn't have to use this as a stand alone function, but use the argument
+  in \code{\link{connect_fish_db}}
 }
 \examples{
 Need to add...
