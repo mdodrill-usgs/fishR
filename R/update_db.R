@@ -88,7 +88,7 @@ update_db = function(){
   # Could add some data formatting stuff here, before the tables are written to the db...
 
   # create a blank database
-  my_db <- dplyr::src_sqlite(db.name, create = T)
+  my_db <- dplyr::src_sqlite(db.name, create = T)   # need to find a better way to do this as it's depricated
 
   # addes these tables to the "my_db"
   dplyr::copy_to(my_db, samp, temporary = FALSE)
