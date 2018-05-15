@@ -13,4 +13,5 @@ Imports:
   DBI,
   ggmcmc,
   gridExtra,
-  ggthemes
+  ggthemes,
+  dplyr
