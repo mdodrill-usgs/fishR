@@ -51,7 +51,7 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
 
   s <- coda::mcmc.list(lapply(1:ncol(fit), function(x) coda::mcmc(as.array(fit)[,x,])))
   # this often thows a warning, don't think this is needed/meaningful, so I turned it off ;)
-  s <- suppressWarnings(ggs(s))
+  s <- suppressWarnings(ggmcmc::ggs(s))
 
   names = make.name(par.name, number)
 
@@ -87,13 +87,13 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
                        Chain = rep(1,length(names)),
                        my.y = my.y2$y.val)
 
-  set.1 = ggs_traceplot(ltl.s) +
+  set.1 = ggmcmc::ggs_traceplot(ltl.s) +
     # geom_text(data = r.hat.d, x = -3, aes(y = my.y, label = Rhat), color = "#cb4b16") + # add Rhat values
     geom_label(data = r.hat.d, x = 0, aes(y = my.y, label = Rhat), color = "#cb4b16", fill = "#002b36", size = 3) + # add Rhat values
     geom_label(data = n.eff.d, x = 0, aes(y = my.y, label = Rhat), color = "#cb4b16", fill = "#002b36", size = 3) + # add Rhat values
 
 
-    theme_solarized(light = FALSE) +
+    ggthemes::theme_solarized(light = FALSE) +
     theme(strip.background = element_rect(fill = "#002b36", color = "#002b36"),
           strip.text = element_text(color = "#cb4b16"),
           legend.position = "none")
@@ -103,7 +103,7 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
       geom_density(alpha = 0.3) + scale_fill_discrete(name = "Chain") +
       scale_colour_discrete(name = "Chain") +
       facet_wrap(~Parameter, ncol = 1, scales = "free_y") +
-      theme_solarized(light = FALSE) +
+      ggthemes::theme_solarized(light = FALSE) +
       theme(strip.background = element_rect(fill = "#002b36", color = "#002b36"),
             strip.text = element_text(color = "#cb4b16"),
             legend.key = element_blank())
@@ -112,14 +112,14 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
       geom_density(alpha = 0.3) + scale_fill_discrete(name = "Chain") +
       scale_colour_discrete(name = "Chain") +
       facet_wrap(~Parameter, ncol = 1, scales = "free") +
-      theme_solarized(light = FALSE) +
+      ggthemes::theme_solarized(light = FALSE) +
       theme(strip.background = element_rect(fill = "#002b36", color = "#002b36"),
             strip.text = element_text(color = "#cb4b16"),
             legend.key = element_blank())
 
   }
 
-  grid.arrange(set.1, set.2, ncol = 2)
+  gridExtra::grid.arrange(set.1, set.2, ncol = 2)
 }
 
 # my_plots(fit, "mu_lprod", 6:10)
