@@ -11,6 +11,8 @@
 #' @examples Need to add examples.
 #' @author Michael J. Dodrill, \email{mdodrill@usgs.gov}
 #' @importFrom magrittr "%>%"
+#' @importFrom ggplot2 "ggplot"
+#' @importFrom ggplot2 "geom_label"
 #' @export
 
 # to do:

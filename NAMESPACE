@@ -3,4 +3,6 @@
 export(connect_fish_db)
 export(stan_trace)
 export(update_db)
+importFrom(ggplot2,"geom_label")
+importFrom(ggplot2,"ggplot")
 importFrom(magrittr,"%>%")
