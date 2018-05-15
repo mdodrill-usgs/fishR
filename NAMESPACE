@@ -3,3 +3,4 @@
 export(connect_fish_db)
 export(stan_trace)
 export(update_db)
+importFrom(magrittr,"%>%")
