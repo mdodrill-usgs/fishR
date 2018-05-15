@@ -10,6 +10,7 @@
 #' @param same.scale Display the density plots on the same x-axis scale, across parameters. Defaults to false.
 #' @examples Need to add examples.
 #' @author Michael J. Dodrill, \email{mdodrill@usgs.gov}
+#' @importFrom magrittr "%>%"
 #' @export
 
 # to do:
