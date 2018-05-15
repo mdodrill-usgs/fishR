@@ -20,6 +20,9 @@
 #' @importFrom ggplot2 "scale_colour_discrete"
 #' @importFrom ggplot2 "scale_fill_discrete"
 #' @importFrom ggplot2 "facet_wrap"
+#' @importFrom ggplot2 "element_rect"
+#' @importFrom ggplot2 "element_blank"
+#' @importFrom ggplot2 "element_text"
 #' @export
 
 # to do:
