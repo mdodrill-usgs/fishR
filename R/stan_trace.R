@@ -72,10 +72,10 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
   n.eff = n.tmp[which(names(n.tmp) %in% names)]
 
 
-  my.y = group_by(ltl.s, Parameter) %>%
+  my.y = dplyr::group_by(ltl.s, Parameter) %>%
     summarize(y.val = quantile(value, .9)) # y.val is the position to place the label (below)
 
-  my.y2 = group_by(ltl.s, Parameter) %>%
+  my.y2 = dplyr::group_by(ltl.s, Parameter) %>%
     summarize(y.val = quantile(value, .2)) # y.val is the position to place the label (below)
 
   r.hat.d = data.frame(Parameter = names(r.hat),
