@@ -10,9 +10,16 @@
 #' @param same.scale Display the density plots on the same x-axis scale, across parameters. Defaults to false.
 #' @examples Need to add examples.
 #' @author Michael J. Dodrill, \email{mdodrill@usgs.gov}
+#'
 #' @importFrom magrittr "%>%"
 #' @importFrom ggplot2 "ggplot"
 #' @importFrom ggplot2 "geom_label"
+#' @importFrom ggplot2 "aes"
+#' @importFrom ggplot2 "theme"
+#' @importFrom ggplot2 "geom_density"
+#' @importFrom ggplot2 "scale_colour_discrete"
+#' @importFrom ggplot2 "scale_fill_discrete"
+#' @importFrom ggplot2 "facet_wrap"
 #' @export
 
 # to do:
