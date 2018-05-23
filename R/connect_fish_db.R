@@ -26,6 +26,11 @@ connect_fish_db = function(update.db = FALSE){
 
   # if the dir doesn't exist, make one and copy the db into it
   if(dir.exists(path = db.dir.loc) == FALSE){
+
+    if(dir.exists(path = db.dir.sq.m) == FALSE){
+      return(message("MD: Can't find the database!, Are you connected to the M drive?"))
+    }
+
     message("MD: No sqlite database exists locally, so copying from M:")
     dir.create(db.dir.loc, showWarnings = FALSE)
 
