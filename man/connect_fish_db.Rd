@@ -2,18 +2,23 @@
 % Please edit documentation in R/connect_fish_db.R
 \name{connect_fish_db}
 \alias{connect_fish_db}
-\title{A basic function}
+\title{Conection to the fish database}
 \usage{
 connect_fish_db(update.db = FALSE)
 }
 \arguments{
-\item{test}{Tests if the function is working. Defaults to TRUE.}
+\item{update.db}{will run the function 'update_db', which checks for a
+updated version of the database.}
 }
 \description{
-This is a test function I wrote.
+This function connects to the fish database stored in SQLite so
+  the user can access tables using database functions, mostly from dplyr.
+  Setting update.db to TRUE will check the M: drive to see if a newer version
+  is avaliable. The first time the function is run, a local copy of the fish
+  database is created.
 }
 \examples{
-test()
+Need to add...
 }
 \author{
 Michael J. Dodrill, \email{mdodrill@usgs.gov}
