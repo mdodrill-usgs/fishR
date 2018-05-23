@@ -78,15 +78,17 @@ update_db = function(){
   #---------------------------------
   # create the new db
 
-  samp = read.table(file = file.name, header = T, sep = ",")
+  samp = read.table(file = file.name, header = T, sep = ",", stringsAsFactors = F)
   colnames(samp) = tolower(colnames(samp))
 
-  spec = read.table(file = file.name.2, header = T, sep = ",")
+  spec = read.table(file = file.name.2, header = T, sep = ",", stringsAsFactors = F)
   colnames(spec) = tolower(colnames(spec))
 
   db.name = paste(db.dir.sq.m, "/my_db_", the.one.date, ".sqlite3", sep = "")
 
   # Could add some data formatting stuff here, before the tables are written to the db...
+  samp$start_datetime = as.character(as.POSIXct(strptime(samp$start_datetime, "%m/%d/%Y %H:%M:%S")))
+  samp$end_datetime = as.character(as.POSIXct(strptime(samp$end_datetime, "%m/%d/%Y %H:%M:%S")))
 
   # create a blank database
   my_db <- dplyr::src_sqlite(db.name, create = T)   # need to find a better way to do this as it's depricated
