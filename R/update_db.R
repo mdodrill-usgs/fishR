@@ -79,8 +79,10 @@ update_db = function(){
   # create the new db
 
   samp = read.table(file = file.name, header = T, sep = ",")
+  colnames(samp) = tolower(colnames(samp))
 
   spec = read.table(file = file.name.2, header = T, sep = ",")
+  colnames(spec) = tolower(colnames(spec))
 
   db.name = paste(db.dir.sq.m, "/my_db_", the.one.date, ".sqlite3", sep = "")
 
