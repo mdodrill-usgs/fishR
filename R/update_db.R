@@ -1,7 +1,7 @@
 #' @title Creates a SQLite database on the M drive
 #'
-#' @description Finds the Access database on the M drive and creates a new
-#'   SQLite database, if the SQLite needs updating. The Function will not work
+#' @description Finds the fish Access database on the M drive and creates a new
+#'   SQLite database, if the SQLite needs updating. The function will not work
 #'   unless you are connected to the M drive. Most of the time the user
 #'   shouldn't have to use this as a stand alone function, but use the argument
 #'   in \code{\link{connect_fish_db}}
@@ -67,6 +67,24 @@ update_db = function(){
                "FISH_T_SPECIMEN",
                file.name.2))
 
+  #---------------------------------
+  # Sample type lookup
+  file.name.3 = paste(db.dir.sq.m, "/sample_type_table_", the.one.date, ".txt", sep = "")
+
+  system(paste(exporter.path,
+               db.path,
+               "GCMRC_T_SAMPLE_TYPE",
+               file.name.3))
+
+  #---------------------------------
+  # Sample type lookup
+  file.name.4 = paste(db.dir.sq.m, "/gear_type_table_", the.one.date, ".txt", sep = "")
+
+  system(paste(exporter.path,
+               db.path,
+               "GCMRC_T_GEAR",
+               file.name.4))
+
   #-----------------------------------------------------------------------------#
   # check if sqlite db is in the data folder and delete before making a new one
 
@@ -76,7 +94,7 @@ update_db = function(){
   }
 
   #---------------------------------
-  # create the new db
+  # read in files (loop or apply here...)
 
   samp = read.table(file = file.name, header = T, sep = ",", stringsAsFactors = F)
   colnames(samp) = tolower(colnames(samp))
@@ -84,23 +102,35 @@ update_db = function(){
   spec = read.table(file = file.name.2, header = T, sep = ",", stringsAsFactors = F)
   colnames(spec) = tolower(colnames(spec))
 
-  db.name = paste(db.dir.sq.m, "/my_db_", the.one.date, ".sqlite3", sep = "")
+  sample_type = read.table(file = file.name.3, header = T, sep = ",", stringsAsFactors = F)
+  colnames(sample_type) = tolower(colnames(sample_type))
 
-  # Could add some data formatting stuff here, before the tables are written to the db...
+  gear_type = read.table(file = file.name.4, header = T, sep = ",", stringsAsFactors = F)
+  colnames(gear_type) = tolower(colnames(gear_type))
+
+  #---------------------------------
+  # formatting stuff here, before the tables are written to the db...
   samp$start_datetime = as.character(as.POSIXct(strptime(samp$start_datetime, "%m/%d/%Y %H:%M:%S")))
   samp$end_datetime = as.character(as.POSIXct(strptime(samp$end_datetime, "%m/%d/%Y %H:%M:%S")))
 
-  # create a blank database
+  # only fish sample types, and exclude last cols (nothing in these)
+  sample_type = sample_type[sample_type$project == "FISH",1:6]
+
+  gear_type = gear_type[gear_type$owner == "FISH",]
+
+  #---------------------------------
+  # create the new db
+  db.name = paste(db.dir.sq.m, "/Dodrill_db_", the.one.date, ".sqlite3", sep = "")
   my_db <- dplyr::src_sqlite(db.name, create = T)   # need to find a better way to do this as it's depricated
 
   # addes these tables to the "my_db"
   dplyr::copy_to(my_db, samp, temporary = FALSE)
   dplyr::copy_to(my_db, spec, temporary = FALSE)
+  dplyr::copy_to(my_db, sample_type, temporary = FALSE)
+  dplyr::copy_to(my_db, gear_type, temporary = FALSE)
 
   # remove the .txt files
-  file.remove(file.name)
-  file.remove(file.name.2)
+  do.call(file.remove, list(list.files(path = db.dir.sq.m, pattern = ".txt", full.names = T)))
 
-  message("MD: Update Successful")
-  return()
+  return(message("MD: Update Successful"))
 }
