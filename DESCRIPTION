@@ -15,4 +15,5 @@ Imports:
   gridExtra,
   ggthemes,
   ggplot2,
-  dplyr
+  dplyr,
+  ggmcmc
