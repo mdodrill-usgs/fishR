@@ -2,7 +2,7 @@
 % Please edit documentation in R/organize.R
 \name{organize}
 \alias{organize}
-\title{}
+\title{Organizes fitted model objects from JAGS and Stan}
 \usage{
 organize(fit, par.name, mcmc.out = FALSE)
 }
@@ -15,7 +15,7 @@ organize(fit, par.name, mcmc.out = FALSE)
 returned. Defaults to FALSE.}
 }
 \description{
-
+Takes an fitted Bayesian model object from eith JAGS or Stan and returns a dataframe.
 }
 \examples{
 Add these in...

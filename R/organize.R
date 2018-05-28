@@ -1,6 +1,6 @@
-#' @title
+#' @title Organizes fitted model objects from JAGS and Stan
 #'
-#' @description
+#' @description Takes an fitted Bayesian model object from eith JAGS or Stan and returns a dataframe.
 #'
 #' @param fit Model object from JAGS or Stan
 #' @param par.name Parameter of intrest to organize into a dataframe
@@ -19,7 +19,7 @@ organize = function(fit, par.name, mcmc.out = FALSE){
     if(mcmc.out == FALSE){
       tmp = coda::mcmc.list(lapply(1:fit$model$nchain(), function(x) coda::mcmc(fit$BUGSoutput$sims.array[,x,])))
 
-      f1 = ggs(tmp, family = par.name)
+      f1 = ggmcmc::ggs(tmp, family = par.name)
 
     } else {
 
@@ -32,7 +32,7 @@ organize = function(fit, par.name, mcmc.out = FALSE){
     if(mcmc.out == FALSE){
       tmp = coda::mcmc.list(lapply(1:3, function(x) coda::mcmc(fit$BUGSoutput$sims.array[,x,])))
 
-      f1 = ggs(tmp, family = par.name)
+      f1 = ggmcmc::ggs(tmp, family = par.name)
 
     } else {
 
@@ -44,10 +44,10 @@ organize = function(fit, par.name, mcmc.out = FALSE){
   if(any(class(fit) == "stanfit")){
     if(mcmc.out == FALSE){
       # looks like gss works directly with stan objects now...
-      f1 <- ggs(fit, family = par.name)
+      f1 <- ggmcmc::ggs(fit, family = par.name)
       # used to do this... but with the new 'family' argument
       # tmp <- coda::mcmc.list(lapply(1:ncol(fit), function(x) coda::mcmc(as.array(fit)[,x,])))
-      # f1 <- ggs(tmp, family = par.name)
+      # f1 <- ggmcmc::ggs(tmp, family = par.name)
 
     } else {
 
