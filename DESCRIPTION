@@ -16,4 +16,5 @@ Imports:
   ggthemes,
   ggplot2,
   dplyr,
-  ggmcmc
+  ggmcmc,
+  coda
