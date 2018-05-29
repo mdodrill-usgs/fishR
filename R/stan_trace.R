@@ -61,28 +61,43 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
     }
     return(out)
   }
-
-  s <- coda::mcmc.list(lapply(1:ncol(fit), function(x) coda::mcmc(as.array(fit)[,x,])))
+  #------------------------------------
+  # s <- coda::mcmc.list(lapply(1:ncol(fit), function(x) coda::mcmc(as.array(fit)[,x,])))
   # this often thows a warning, don't think this is needed/meaningful, so I turned it off ;)
-  s <- suppressWarnings(ggmcmc::ggs(s))
+  # s <- suppressWarnings(ggmcmc::ggs(s))
+
+  s.mcmc <- organize(fit = fit, mcmc.out = TRUE)
+
+  s <- suppressWarnings(ggmcmc::ggs(s.mcmc))
+
 
   names = make.name(par.name, number)
 
   ltl.s = s[which(s$Parameter %in% names),]
+  #------------------------------------
 
   attr(ltl.s, "nParameters") <- length(names)
   attr(ltl.s, "nChains") <- 3
   attr(ltl.s, "nThin") <- 1
   attr(ltl.s, "nBurnin") <- 0
 
-  # get the Rhat values
-  r.tmp = rstan::summary(fit)$summary[,"Rhat"]
-  r.hat = r.tmp[which(names(r.tmp) %in% names)]
+  if(class(fit) == "stanfit"){
+    # get the Rhat values
+    r.tmp = rstan::summary(fit)$summary[,"Rhat"]
+    r.hat = r.tmp[which(names(r.tmp) %in% names)]
 
-  # get the n.eff
-  n.tmp = rstan::summary(fit)$summary[,"n_eff"]
-  n.eff = n.tmp[which(names(n.tmp) %in% names)]
+    # get the n.eff
+    n.tmp = rstan::summary(fit)$summary[,"n_eff"]
+    n.eff = n.tmp[which(names(n.tmp) %in% names)]
+  }
 
+  if(class(fit) == "rjags"){
+    r.tmp = fit$BUGSoutput$summary[,8]
+    r.hat = r.hat = r.tmp[which(names(r.tmp) %in% names)]
+
+    n.tmp = coda::effectiveSize(fit)
+    n.eff = n.tmp[which(names(n.tmp) %in% names)]
+  }
 
   my.y = dplyr::group_by(ltl.s, Parameter) %>%
     dplyr::summarize(y.val = quantile(value, .9)) # y.val is the position to place the label (below)
