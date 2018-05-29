@@ -14,7 +14,17 @@
 organize = function(fit, par.name, mcmc.out = FALSE){
   # require(ggmcmc)
 
+
   # JAGS
+  if(class(fit)[1] == "rjags"){
+    # if(fit$model)
+    tryCatch({fit$model$nchain()},
+             error = function(e){
+               fit = R2jags::recompile(fit)
+               return(fit)
+             })
+  }
+
   if(class(fit)[1] == "rjags"){
     if(mcmc.out == FALSE){
       tmp = coda::mcmc.list(lapply(1:fit$model$nchain(), function(x) coda::mcmc(fit$BUGSoutput$sims.array[,x,])))
