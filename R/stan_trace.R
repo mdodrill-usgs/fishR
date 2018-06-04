@@ -81,7 +81,7 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
   attr(ltl.s, "nThin") <- 1
   attr(ltl.s, "nBurnin") <- 0
 
-  if(class(fit) == "stanfit"){
+  if(any(class(fit) == "stanfit")){
     # get the Rhat values
     r.tmp = rstan::summary(fit)$summary[,"Rhat"]
     r.hat = r.tmp[which(names(r.tmp) %in% names)]
@@ -91,11 +91,12 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
     n.eff = n.tmp[which(names(n.tmp) %in% names)]
   }
 
-  if(class(fit) == "rjags"){
+  if(any(class(fit) == "rjags")){
     r.tmp = fit$BUGSoutput$summary[,8]
     r.hat = r.hat = r.tmp[which(names(r.tmp) %in% names)]
 
-    n.tmp = coda::effectiveSize(fit)
+    # n.tmp = coda::effectiveSize(fit)
+    n.tmp = fit$BUGSoutput$summary[,9]
     n.eff = n.tmp[which(names(n.tmp) %in% names)]
   }
 
