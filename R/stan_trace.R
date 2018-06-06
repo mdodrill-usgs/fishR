@@ -23,6 +23,7 @@
 #' @importFrom ggplot2 "element_rect"
 #' @importFrom ggplot2 "element_blank"
 #' @importFrom ggplot2 "element_text"
+#' @importFrom ggplot2 "labs"
 #' @export
 
 # to do:
@@ -131,20 +132,22 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
     set.2 <- ggplot(ltl.s, aes(x = value, colour = as.factor(Chain), fill = as.factor(Chain))) +
       geom_density(alpha = 0.3) + scale_fill_discrete(name = "Chain") +
       scale_colour_discrete(name = "Chain") +
+      labs(y = "") +
       facet_wrap(~Parameter, ncol = 1, scales = "free_y") +
       ggthemes::theme_solarized(light = FALSE) +
       theme(strip.background = element_rect(fill = "#002b36", color = "#002b36"),
             strip.text = element_text(color = "#cb4b16"),
-            legend.key = element_blank())
+            legend.position = "none")
   } else {
     set.2 <- ggplot(ltl.s, aes(x = value, colour = as.factor(Chain), fill = as.factor(Chain))) +
       geom_density(alpha = 0.3) + scale_fill_discrete(name = "Chain") +
       scale_colour_discrete(name = "Chain") +
+      labs(y = "") +
       facet_wrap(~Parameter, ncol = 1, scales = "free") +
       ggthemes::theme_solarized(light = FALSE) +
       theme(strip.background = element_rect(fill = "#002b36", color = "#002b36"),
             strip.text = element_text(color = "#cb4b16"),
-            legend.key = element_blank())
+            legend.position = "none")
 
   }
 
