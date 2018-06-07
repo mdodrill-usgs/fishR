@@ -113,6 +113,8 @@ update_db = function(){
   samp$start_datetime = as.character(as.POSIXct(strptime(samp$start_datetime, "%m/%d/%Y %H:%M:%S")))
   samp$end_datetime = as.character(as.POSIXct(strptime(samp$end_datetime, "%m/%d/%Y %H:%M:%S")))
 
+  samp$year = substr(samp$start_datetime, 1, 4)
+
   # only fish sample types, and exclude last cols (nothing in these)
   sample_type = sample_type[sample_type$project == "FISH",1:6]
 
