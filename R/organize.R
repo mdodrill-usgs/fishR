@@ -1,6 +1,6 @@
 #' @title Organizes fitted model objects from JAGS and Stan
 #'
-#' @description Takes an fitted Bayesian model object from eith JAGS or Stan and returns a dataframe.
+#' @description Takes an fitted Bayesian model object from either JAGS or Stan and returns a dataframe.
 #'
 #' @param fit Model object from JAGS or Stan
 #' @param par.name Parameter of intrest to organize into a dataframe
