@@ -48,5 +48,7 @@ connect_fish_db = function(update.db = FALSE){
   # my_db = dplyr::src_sqlite(path = sq.path, create = FALSE)
   my_db = DBI::dbConnect(RSQLite::SQLite(), dbname = sq.path)
 
+  message(paste("DB Version", substr(sq.name, 12, 19)), sep = " ")
+
  return(my_db)
 }
