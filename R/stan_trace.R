@@ -123,7 +123,7 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
     geom_label(data = n.eff.d, x = 0, aes(y = my.y, label = Rhat), color = "#cb4b16", fill = "#002b36", size = 3) + # add Rhat values
 
 
-    ggthemes::theme_solarized(light = FALSE) +
+    ggthemes::theme_solarized_2(light = FALSE) +
     theme(strip.background = element_rect(fill = "#002b36", color = "#002b36"),
           strip.text = element_text(color = "#cb4b16"),
           legend.position = "none")
@@ -134,7 +134,7 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
       scale_colour_discrete(name = "Chain") +
       labs(y = "") +
       facet_wrap(~Parameter, ncol = 1, scales = "free_y") +
-      ggthemes::theme_solarized(light = FALSE) +
+      ggthemes::theme_solarized_2(light = FALSE) +
       theme(strip.background = element_rect(fill = "#002b36", color = "#002b36"),
             strip.text = element_text(color = "#cb4b16"),
             legend.position = "none")
@@ -144,7 +144,7 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE){
       scale_colour_discrete(name = "Chain") +
       labs(y = "") +
       facet_wrap(~Parameter, ncol = 1, scales = "free") +
-      ggthemes::theme_solarized(light = FALSE) +
+      ggthemes::theme_solarized_2(light = FALSE) +
       theme(strip.background = element_rect(fill = "#002b36", color = "#002b36"),
             strip.text = element_text(color = "#cb4b16"),
             legend.position = "none")
