@@ -14,7 +14,6 @@
 organize = function(fit, par.name, mcmc.out = FALSE){
   # require(ggmcmc)
 
-
   # JAGS
   if(class(fit)[1] == "rjags"){
     # if(fit$model)
@@ -27,9 +26,14 @@ organize = function(fit, par.name, mcmc.out = FALSE){
 
   if(class(fit)[1] == "rjags"){
     if(mcmc.out == FALSE){
-      tmp = coda::mcmc.list(lapply(1:fit$model$nchain(), function(x) coda::mcmc(fit$BUGSoutput$sims.array[,x,])))
+      # "^" is regex for start - so only match for patterns at start
+      key = grep(paste0("^", par.name), dimnames(fit$BUGSoutput$sims.array)[[3]])
 
-      f1 = ggmcmc::ggs(tmp, family = par.name)
+      tmp = coda::mcmc.list(lapply(1:fit$model$nchain(), function(x) coda::mcmc(fit$BUGSoutput$sims.array[,x,key])))
+
+      # subset for par.name above, with the key (hopfully this speeds things up)
+      # f1 = ggmcmc::ggs(tmp, family = par.name)
+      f1 = ggmcmc::ggs(tmp)
 
     } else {
 
@@ -40,9 +44,12 @@ organize = function(fit, par.name, mcmc.out = FALSE){
   # JAGS Parallel
   if(class(fit)[1] == "rjags.parallel"){
     if(mcmc.out == FALSE){
-      tmp = coda::mcmc.list(lapply(1:3, function(x) coda::mcmc(fit$BUGSoutput$sims.array[,x,])))
+      # "^" is regex for start - so only match for patterns at start
+      key = grep(paste0("^", par.name), dimnames(fit$BUGSoutput$sims.array)[[3]])
 
-      f1 = ggmcmc::ggs(tmp, family = par.name)
+      tmp = coda::mcmc.list(lapply(1:3, function(x) coda::mcmc(fit$BUGSoutput$sims.array[,x,key])))
+
+      f1 = ggmcmc::ggs(tmp)
 
     } else {
 
