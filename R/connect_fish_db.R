@@ -12,7 +12,7 @@
 
 
 connect_fish_db = function(update.db = FALSE){
-  # Note: should redo this code, see: https://stackoverflow.com/questions/43620927/dplyr-auto-disconnecting-postgres-connection-issue
+  # Note, see: https://stackoverflow.com/questions/43620927/dplyr-auto-disconnecting-postgres-connection-issue
 
   # library(RSQLite)
   # library(dplyr)
