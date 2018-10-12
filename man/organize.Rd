@@ -15,7 +15,7 @@ organize(fit, par.name, mcmc.out = FALSE)
 returned. Defaults to FALSE.}
 }
 \description{
-Takes an fitted Bayesian model object from eith JAGS or Stan and returns a dataframe.
+Takes an fitted Bayesian model object from either JAGS or Stan and returns a dataframe.
 }
 \examples{
 Add these in...
