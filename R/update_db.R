@@ -33,7 +33,7 @@ update_db = function(){
   # check to see if this version of the db already exists as sqlite db
   db.dir.sq.m = "M:/DATABASE/BIOLOGICAL/FISH/DATABASE_R_SQLite"
 
-  tmp = substr(list.files(path = db.dir.sq.m, pattern = ".sqlite3"), 7, 19)
+  tmp = substr(list.files(path = db.dir.sq.m, pattern = ".sqlite3"), 12, 24)
 
   if(length(tmp) > 0){  # if it exists
     if(the.one.date == tmp){ # if this version matches the one on the M
