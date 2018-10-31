@@ -13,14 +13,16 @@
 #' @importFrom dplyr "summarize"
 #' @export
 
-bayes_summary = function(fit, par.name){
+bayes_summary = function(fit, par.name, percent = 0.95){
 
   dat = organize(fit, par.name, mcmc.out = FALSE)
 
+  l = (1 - percent) / 2
+
   dat.2 = group_by(dat, Parameter) %>%
     summarize(my.mean = mean(value),
-              upper = quantile(value, .95),
-              lower = quantile(value, .05))
+              upper = quantile(value, 1 - l),
+              lower = quantile(value, 1))
 
   return(dat.2)
 }
