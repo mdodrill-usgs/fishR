@@ -4,6 +4,10 @@
 #'
 #' @param fit Model object from JAGS or Stan
 #' @param par.name Parameter of intrest to return summary stats
+#' @param percent Percentage for calculating credible intervals. Defaults to 95% CRI.
+#' @param transform Transformation to be applied to the data before summarizing.
+#'   This is a character vector. For example, transform = "exp", will
+#'   exponentiate the parameter.
 #'
 #' @examples Add these in...
 #' @author Michael J. Dodrill, \email{mdodrill@usgs.gov}
@@ -13,11 +17,15 @@
 #' @importFrom dplyr "summarize"
 #' @export
 
-bayes_summary = function(fit, par.name, percent = 0.95){
+bayes_summary = function(fit, par.name, percent = 0.95, transform = NULL){
 
   dat = organize(fit, par.name, mcmc.out = FALSE)
 
   l = (1 - percent) / 2
+
+  if(!is.null(transform)){
+    dat$value = eval(call(transform, dat$value))
+  }
 
   dat.2 = group_by(dat, Parameter) %>%
     summarize(my.mean = mean(value),
