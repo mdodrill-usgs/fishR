@@ -30,7 +30,7 @@ bayes_summary = function(fit, par.name, percent = 0.95, transform = NULL){
   dat.2 = group_by(dat, Parameter) %>%
     summarize(my.mean = mean(value),
               upper = quantile(value, 1 - l),
-              lower = quantile(value, 1))
+              lower = quantile(value, l))
 
   return(dat.2)
 }
