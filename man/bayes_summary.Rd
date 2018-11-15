@@ -4,12 +4,18 @@
 \alias{bayes_summary}
 \title{Calculate mean, 95% Lower and Upper CRI, from JAGS and Stan}
 \usage{
-bayes_summary(fit, par.name)
+bayes_summary(fit, par.name, percent = 0.95, transform = NULL)
 }
 \arguments{
 \item{fit}{Model object from JAGS or Stan}
 
 \item{par.name}{Parameter of intrest to return summary stats}
+
+\item{percent}{Percentage for calculating credible intervals. Defaults to 95% CRI.}
+
+\item{transform}{Transformation to be applied to the data before summarizing.
+This is a character vector. For example, transform = "exp", will
+exponentiate the parameter.}
 }
 \description{
 Takes an fitted Bayesian model object from either JAGS or Stan and returns summary stats.
