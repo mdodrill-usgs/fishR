@@ -2,9 +2,9 @@
 % Please edit documentation in R/stan_trace.R
 \name{stan_trace}
 \alias{stan_trace}
-\title{Trace plots for Stan model objects}
+\title{Trace plots for Stan or JAGS model objects}
 \usage{
-stan_trace(fit, par.name, number, same.scale = FALSE)
+stan_trace(fit, par.name, number, same.scale = FALSE, n.per.page = 6)
 }
 \arguments{
 \item{fit}{Stan model object.}
@@ -16,9 +16,11 @@ parameter to display.  This can be also be a list for specifying paramaters
 in a matrix. See Details.}
 
 \item{same.scale}{Display the density plots on the same x-axis scale, across parameters. Defaults to false.}
+
+\item{n.per.page}{Number of parameters to display per page. Defaults to 6.}
 }
 \description{
-Creates trace and density plots for Stan model objects, with
+Creates trace and density plots for Stan or JAGS model objects, with
   R-hat and Neff displayed.
 }
 \examples{
