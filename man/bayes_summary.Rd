@@ -2,7 +2,7 @@
 % Please edit documentation in R/bayes_summary.R
 \name{bayes_summary}
 \alias{bayes_summary}
-\title{Calculate mean, 95% Lower and Upper CRI, from JAGS and Stan}
+\title{Calculate mean, 95\% Lower and Upper CRI, from JAGS and Stan}
 \usage{
 bayes_summary(fit, par.name, percent = 0.95, transform = NULL)
 }
@@ -11,7 +11,7 @@ bayes_summary(fit, par.name, percent = 0.95, transform = NULL)
 
 \item{par.name}{Parameter of intrest to return summary stats}
 
-\item{percent}{Percentage for calculating credible intervals. Defaults to 95% CRI.}
+\item{percent}{Percentage for calculating credible intervals. Defaults to 95\% CRI.}
 
 \item{transform}{Transformation to be applied to the data before summarizing.
 This is a character vector. For example, transform = "exp", will
