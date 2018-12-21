@@ -18,7 +18,20 @@ Returns the parameters from a Stan object which are not
   converged, based on Rhat.
 }
 \examples{
-Need to add these
+\dontrun{
+library(rstan)
+scode <- "
+parameters {
+real y[2];
+}
+model {
+y[1] ~ normal(0, 1);
+y[2] ~ double_exponential(0, 2);
+}
+"
+fit <- stan(model_code = scode, iter = 10, verbose = FALSE)
+bad(fit)
+}
 }
 \author{
 Michael J. Dodrill, \email{mdodrill@usgs.gov}

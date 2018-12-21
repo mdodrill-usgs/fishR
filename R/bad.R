@@ -7,7 +7,21 @@
 #' @param r.hat.level Argument controling the level for Rhat. Defaults to 1.2
 #' @param plot Display trace plots of these parameters. (not working)
 #'
-#' @examples Need to add these
+#' @examples
+#' \dontrun{
+#' library(rstan)
+#' scode <- "
+#' parameters {
+#' real y[2];
+#' }
+#' model {
+#' y[1] ~ normal(0, 1);
+#' y[2] ~ double_exponential(0, 2);
+#' }
+#' "
+#' fit <- stan(model_code = scode, iter = 10, verbose = FALSE)
+#' bad(fit)
+#' }
 #' @author Michael J. Dodrill, \email{mdodrill@usgs.gov}
 #' @export
 
