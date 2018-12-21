@@ -1,10 +1,10 @@
-#' @title Calculate mean, 95% Lower and Upper CRI, from JAGS and Stan
+#' @title Calculate mean, 95\% Lower and Upper CRI, from JAGS and Stan
 #'
 #' @description Takes an fitted Bayesian model object from either JAGS or Stan and returns summary stats.
 #'
 #' @param fit Model object from JAGS or Stan
 #' @param par.name Parameter of intrest to return summary stats
-#' @param percent Percentage for calculating credible intervals. Defaults to 95% CRI.
+#' @param percent Percentage for calculating credible intervals. Defaults to 95\% CRI.
 #' @param transform Transformation to be applied to the data before summarizing.
 #'   This is a character vector. For example, transform = "exp", will
 #'   exponentiate the parameter.
