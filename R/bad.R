@@ -39,6 +39,7 @@ bad = function(fit, r.hat.level = 1.2, plot = FALSE){
     # if(plot == TURE){
     #   stan_trace(fit = fit, par.name = )
     # }
+    # this is still returning something - not sure why
     if(length(bad) == 0){
       return(invisible())
     } else {
