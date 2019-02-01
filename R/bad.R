@@ -39,8 +39,11 @@ bad = function(fit, r.hat.level = 1.2, plot = FALSE){
     # if(plot == TURE){
     #   stan_trace(fit = fit, par.name = )
     # }
-
-    return(bad)
+    if(length(bad) == 0){
+      return(invisible())
+    } else {
+      return(bad)
+    }
 
   } else {
     message("This only works for Stan objects")
