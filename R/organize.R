@@ -61,10 +61,10 @@ organize = function(fit, par.name, mcmc.out = FALSE){
   if(any(class(fit) == "stanfit")){
     if(mcmc.out == FALSE){
       # looks like gss works directly with stan objects now...
-      f1 <- ggmcmc::ggs(fit, family = par.name)
+      # f1 <- ggmcmc::ggs(fit, family = par.name)  # not working 6/16/2019, switched back to below...
       # used to do this... but with the new 'family' argument
-      # tmp <- coda::mcmc.list(lapply(1:ncol(fit), function(x) coda::mcmc(as.array(fit)[,x,])))
-      # f1 <- ggmcmc::ggs(tmp, family = par.name)
+      tmp <- coda::mcmc.list(lapply(1:ncol(fit), function(x) coda::mcmc(as.array(fit)[,x,])))
+      f1 <- ggmcmc::ggs(tmp, family = par.name)
 
     } else {
 
