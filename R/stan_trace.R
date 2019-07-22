@@ -70,6 +70,12 @@ stan_trace = function(fit, par.name, number, same.scale = FALSE, n.per.page = 6)
   names = make.name(par.name, number)
 
   ltl.s = s[which(s$Parameter %in% names),]
+
+  # fixes name where there is only one element to the parameter (ex, "beta", not "beta[1]")
+  if(length(names) == 1 & nrow(ltl.s) == 0){
+    names = substr(names, 1, (nchar(names) - 3))
+    ltl.s = s[which(s$Parameter %in% names),]
+  }
   #------------------------------------
   n.page = ceiling(length(names) / n.per.page)
 
