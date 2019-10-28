@@ -47,6 +47,6 @@ bad = function(fit, r.hat.level = 1.2, plot = FALSE){
     }
 
   } else {
-    message("This only works for Stan objects")
+    message("This only works for Stan objects!")
   }
 }
